@@ -1,0 +1,73 @@
+:root {
+    --a: #bfbfbf;
+    --b: #f3f3f3;
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+#content {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+}
+
+#main {
+    flex-grow: 1;
+    padding: 20px;
+    position: relative;
+}
+
+#past {
+    width: 20%;
+    border-left: 2px solid black;
+    padding: 40px;
+    list-style-type: none;
+    font: 1.4rem "Lato";
+}
+
+#main > * {
+    position: absolute;
+}
+
+#definition {
+    top: 20px;
+    left: 20px;
+}
+
+#last {
+    font: 600 4rem "Poppins";
+}
+
+#define {
+    font: 1.2rem "Lato";
+    border-left: 2px solid var(--a);
+    margin-left: 1px;
+    padding-left: 25px;
+}
+
+#timer {
+    top: 20px;
+    right: 60px;
+    font: 2rem "Poppins";
+}
+
+#guess {
+    width: 20%;
+    bottom: 40px;
+    right: 80px;
+    border: none;
+    outline: none;
+    font-family: "Lato";
+    font-size: 2rem;
+    padding: 10px 20px;
+    border-bottom: 4px solid var(--a);
+    border-radius: 6px 6px 3px 3px;
+}
+
+#guess:focus {
+    background-color: var(--b);
+}
