@@ -1,2 +1,2 @@
-# Word Game
-A Node.js project I'm working on
+# Mutation
+A Node.js word game project I'm working on
