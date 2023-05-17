@@ -26,6 +26,9 @@ module.exports = {
         last() {
             return this.past[this.past.length - 1];
         }
+        current() {
+            return this.players[this.turn];
+        }
         total() {
             return this.past.length;
         }

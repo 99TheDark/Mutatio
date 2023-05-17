@@ -3,7 +3,7 @@ const express = require("express");
 const http = require("http");
 const {Server} = require("socket.io");
 const {Game} = require("./game.js");
-const {compare, define} = require("./words.js");
+const {compare} = require("./words.js");
 
 const app = express();
 const server = http.createServer(app);
@@ -17,8 +17,7 @@ const game = new Game();
 app.use(express.static(`${base}/public/`));
 
 game.guess("grain");
-define(game.past[0])
-    .then(info => game.define(info.first))
+game.define("The harvested seeds of various grass food crops eg: wheat, corn, barley.");
 
 app.get("/", (req, res) => {
     res.sendFile(`${base}/redirect.html`);
@@ -35,27 +34,24 @@ io.on("connection", socket => {
 
     socket.on("guess", val => {
         const word = val.toLowerCase();
+
         if(
             game.canGuess(socket) &&
             !game.past.includes(word) &&
             /^[a-z]*$/g.test(word) &&
             compare(word, game.last()) == 1
         ) {
-            define(word)
-                .then(info => {
-                    if(info != null) {
-                        const definition = info.first;
+            game.current().emit("define", word);
+        }
+    });
 
-                        console.log(`${socket.id} guessed ${word}`);
-                        game.guess(word);
-                        game.define(definition);
-                        game.next();
+    socket.on("status", (status, word, definition) => {
+        if(status && game.canGuess(socket)) {
+            game.players.forEach(player => player.emit("turn", player == game.current(), word, definition));
 
-                        game.players.forEach(player => {
-                            player.emit("turn", word, definition);
-                        });
-                    }
-                })
+            game.next();
+            game.guess(word);
+            game.define(definition);
         }
     });
 });

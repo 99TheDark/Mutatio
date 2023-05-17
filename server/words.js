@@ -1,8 +1,6 @@
 const fetch = require("node-fetch");
 const lemmatize = require("wink-lemmatizer");
 
-const ranking = ["conjunction", "article", "noun", "adjective", "pronoun", "verb", "adverb", "interjection"];
-
 // Levenshtein distance algorithm
 const compare = (a, b) => {
     if(b.length == 0) {
@@ -19,29 +17,6 @@ const compare = (a, b) => {
         );
     }
 };
-
-const define = async word => {
-    const data = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
-    if(data.status != 200) return null;
-
-    const json = (await data.json())[0];
-    const meanings = json.meanings;
-
-    const meaning = meanings.reduce(
-        (acc, cur) => ranking.indexOf(cur.partOfSpeech) < ranking.indexOf(acc.partOfSpeech) ? cur : acc,
-        meanings[0]
-    );
-    const definitions = meaning.definitions;
-
-    return {
-        definitions: definitions,
-        first: definitions[0].definition,
-        count: definitions.length,
-        random: () => definitions[Math.floor(Math.random() * definitions.length)].definition
-    };
-};
-
 module.exports = {
-    compare: compare,
-    define: define
+    compare: compare
 };

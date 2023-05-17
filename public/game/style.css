@@ -49,6 +49,7 @@ body {
 }
 
 #last {
+    margin: 0px;
     font: 600 5rem "Poppins";
 }
 
