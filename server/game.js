@@ -4,6 +4,7 @@ module.exports = {
             this.players = [];
             this.turn = 0;
             this.past = [];
+            this.definition = null;
         }
         add(player) {
             this.players.push(player);
@@ -15,6 +16,9 @@ module.exports = {
         }
         guess(word) {
             this.past.push(word);
+        }
+        define(definition) {
+            this.definition = definition;
         }
         next() {
             this.turn = (this.turn + 1) % this.players.length;
