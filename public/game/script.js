@@ -7,12 +7,15 @@ const createWord = word => `<li class="word">${capitalize(word)}</li>`;
 
 $(document).ready(() => {
     $("input").keyup(e => {
-        if(e.key == "Enter") socket.emit("guess", $("input").val());
+        if(e.key == "Enter") {
+            socket.emit("guess", $("input").val());
+            $("input").val("");
+        }
     });
 });
 
 socket.on("setup", (first, words, definition) => {
-    if(first) $(".turn").addClass("my-turn"); 
+    if(first) $(".turn").addClass("visible"); 
 
     words.forEach(word => $("#past").prepend(createWord(word)));
 
@@ -21,7 +24,7 @@ socket.on("setup", (first, words, definition) => {
 });
 
 socket.on("update", turn => {
-    turn ? $(".turn").addClass("my-turn") : $(".turn").removeClass("my-turn");
+    turn ? $(".turn").addClass("visible") : $(".turn").removeClass("visible");
 });
 
 socket.on("define", word => {
@@ -46,7 +49,7 @@ socket.on("define", word => {
 });
 
 socket.on("turn", (was, mine, word, definition) => {
-    mine ? $(".turn").addClass("my-turn") : $(".turn").removeClass("my-turn");
+    mine ? $(".turn").addClass("visible") : $(".turn").removeClass("visible");
 
     if(!was) {
         $("#past").prepend(createWord(word));

@@ -16,8 +16,8 @@ const game = new Game();
 
 app.use(express.static(`${base}/public/`));
 
-game.guess("ink");
-game.define("A colored fluid used for writing, drawing, printing, or duplicating.");
+game.guess("tail");
+game.define("The hindmost part of an animal, especially when prolonged beyond the rest of the body, such as the flexible extension of the backbone in a vertebrate, the feathers at the hind end of a bird, or a terminal appendage in an insect.");
 
 app.get("/", (req, res) => {
     res.sendFile(`${base}/redirect.html`);

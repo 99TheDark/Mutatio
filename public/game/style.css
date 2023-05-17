@@ -78,10 +78,15 @@ body {
     padding: 10px 20px;
     border-bottom: 4px solid var(--b);
     border-radius: 6px 6px 3px 3px;
+    display: none;
 }
 
 #guess:focus {
     background-color: var(--a);
+}
+
+#guess.visible {
+    display: block;
 }
 
 #notify {
@@ -93,13 +98,10 @@ body {
     font: 1rem "Poppins";
     background-color: var(--e);
     color: white;
+    transform: translateY(-100%);
     transition: transform 0.5s ease;
 }
 
-#notify.my-turn {
+#notify.visible {
     transform: translateY(0%);
-}
-
-#notify:not(.my-turn) {
-    transform: translateY(-100%);
 }
