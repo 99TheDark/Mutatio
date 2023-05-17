@@ -15,6 +15,7 @@ const base = path.join(__dirname, "..");
 const game = new Game();
 
 app.use(express.static(`${base}/public/`));
+game.guess("grain");
 
 app.get("/", (req, res) => {
     res.sendFile(`${base}/redirect.html`);
@@ -34,6 +35,8 @@ io.on("connection", socket => {
             console.log(`${socket.id} guessed ${word}`);
             game.guess(word);
             game.next();
+
+            game.players.forEach(player => player.emit("turn", word));
         }
     })
 });
