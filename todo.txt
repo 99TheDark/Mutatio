@@ -1,7 +1,9 @@
 • Connect Azure app
-• Working timer
 • Main page
 • User list 
 • Username
 • Navigation bar
 • Cache username
+• Working timer
+• Timer up stops the person from playing but can continue viewing
+• Give up button
