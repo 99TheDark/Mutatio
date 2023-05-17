@@ -1,2 +1,7 @@
 • Connect Azure app
 • Working timer
+• Main page
+• User list 
+• Username
+• Navigation bar
+• Cache username
