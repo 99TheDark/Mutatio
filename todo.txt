@@ -1,3 +1,2 @@
 • Connect Azure app
 • Working timer
-• Invalid word animation

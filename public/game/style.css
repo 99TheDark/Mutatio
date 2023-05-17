@@ -89,6 +89,25 @@ body {
     display: block;
 }
 
+.invalid {
+    animation: error ease 0.5s;
+}
+
+@keyframes error {
+    10% {
+        color: var(--h);
+    }
+    70% {
+        transform: scale(113%);
+    }
+    90% {
+        transform: scale(100%);
+    }
+    100% {
+        color: auto;
+    }
+}
+
 #notify {
     position: fixed;
     top: 0px;

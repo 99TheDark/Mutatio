@@ -38,16 +38,18 @@ io.on("connection", socket => {
     });
 
     socket.on("guess", val => {
-        const word = val.toLowerCase();
-
-        if(
-            game.isTurn(socket) &&
-            !game.past.includes(word) &&
-            /^[a-z]*$/g.test(word) &&
-            compare(word, game.last()) == 1 &&
-            game.valid(word)
-        ) {
-            game.current().emit("define", word);
+        if(game.isTurn(socket)) {
+            const word = val.toLowerCase();
+            if(
+                !game.past.includes(word) &&
+                /^[a-z]*$/g.test(word) &&
+                compare(word, game.last()) == 1 &&
+                game.valid(word)
+            ) {
+                socket.emit("define", word);
+            } else {
+                socket.emit("invalid", word);
+            }
         }
     });
 
@@ -59,7 +61,7 @@ io.on("connection", socket => {
             game.define(definition);
 
             game.players.forEach(player => {
-                player.emit("turn", player == prev, player == game.current(), word, definition);
+                player.emit("turn", player == prev, game.isTurn(player), word, definition);
             });
         }
     });

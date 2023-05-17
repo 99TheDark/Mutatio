@@ -9,7 +9,7 @@ $(document).ready(() => {
     $("input").keyup(e => {
         if(e.key == "Enter") {
             socket.emit("guess", $("input").val());
-            $("input").val("");
+            $("#guess").prop("disabled", true);
         }
     });
 });
@@ -45,11 +45,26 @@ socket.on("define", word => {
 
             socket.emit("status", true, word, def);
         })
-        .catch(() => socket.emit("status", false, null, null))
+        .catch(() => {
+            socket.emit("status", false, null, null);
+        })
+});
+
+socket.on("invalid", () => {
+    $("#guess").addClass("invalid").on("animationend", () => {
+        $("#guess").removeClass("invalid");
+        $("#guess").prop("disabled", false);
+    });
 });
 
 socket.on("turn", (was, mine, word, definition) => {
-    mine ? $(".turn").addClass("visible") : $(".turn").removeClass("visible");
+    if(mine) {
+        $(".turn").addClass("visible");
+        $("input").val("");
+        $("#guess").prop("disabled", false);
+    } else {
+        $(".turn").removeClass("visible");
+    }
 
     if(!was) {
         $("#past").prepend(createWord(word));
