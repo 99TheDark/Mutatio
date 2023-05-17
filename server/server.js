@@ -24,6 +24,8 @@ app.get("/", (req, res) => {
 io.on("connection", socket => {
     game.add(socket);
 
+    socket.emit("setup", game.past);
+
     socket.on("disconnect", () => {
         game.remove(socket);
     });
@@ -38,7 +40,7 @@ io.on("connection", socket => {
 
             game.players.forEach(player => player.emit("turn", word));
         }
-    })
+    });
 });
 
 server.listen(port, () => {
