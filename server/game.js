@@ -1,3 +1,5 @@
+const {lemmatizer} = require("lemmatizer");
+
 module.exports = {
     Game: class {
         constructor() {
@@ -13,6 +15,9 @@ module.exports = {
             const idx = this.players.indexOf(player);
             this.players.splice(idx, 1);
             if(idx < this.turn) this.turn--;
+        }
+        valid(word) {
+            return !this.past.includes(lemmatizer(word));
         }
         guess(word) {
             this.past.push(word);

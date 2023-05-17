@@ -1,6 +1,3 @@
-const fetch = require("node-fetch");
-const lemmatize = require("wink-lemmatizer");
-
 // Levenshtein distance algorithm
 const compare = (a, b) => {
     if(b.length == 0) {
@@ -17,6 +14,7 @@ const compare = (a, b) => {
         );
     }
 };
+
 module.exports = {
     compare: compare
 };

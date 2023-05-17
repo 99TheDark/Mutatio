@@ -15,7 +15,7 @@ $(document).ready(() => {
 });
 
 socket.on("setup", (first, words, definition) => {
-    if(first) $(".turn").addClass("visible"); 
+    if(first) $(".turn").addClass("visible");
 
     words.forEach(word => $("#past").prepend(createWord(word)));
 

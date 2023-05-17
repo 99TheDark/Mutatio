@@ -44,7 +44,8 @@ io.on("connection", socket => {
             game.isTurn(socket) &&
             !game.past.includes(word) &&
             /^[a-z]*$/g.test(word) &&
-            compare(word, game.last()) == 1
+            compare(word, game.last()) == 1 &&
+            game.valid(word)
         ) {
             game.current().emit("define", word);
         }
