@@ -1,3 +1,4 @@
+const path = require("path");
 const express = require("express");
 const http = require("http");
 const {Server} = require("socket.io");
@@ -9,13 +10,14 @@ const server = http.createServer(app);
 const io = new Server(server);
 
 const port = 3000;
+const base = path.join(__dirname, "..");
 
 const game = new Game();
 
-app.use(express.static(`${__dirname}/public/`));
+app.use(express.static(`${base}/public/`));
 
 app.get("/", (req, res) => {
-    res.sendFile(`${__dirname}/redirect.html`);
+    res.sendFile(`${base}/redirect.html`);
 });
 
 io.on("connection", socket => {

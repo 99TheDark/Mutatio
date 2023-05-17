@@ -1,6 +1,14 @@
 :root {
-    --a: #bfbfbf;
-    --b: #f3f3f3;
+    --a: #f0f9f9;
+    --b: #deebeb;
+    --c: #75dddd;
+    --d: #84c7d0;
+    --e: #9297c4;
+    --f: #9368b7;
+    --g: #663a8a;
+    --h: #a31907;
+    --i: #1f1429;
+    --j: #000000;
 }
 
 body {
@@ -26,25 +34,27 @@ body {
     border-left: 2px solid black;
     padding: 40px;
     list-style-type: none;
-    font: 1.4rem "Lato";
+    font: 300 1.5rem "Lato";
+    line-height: 1.2em;
 }
 
-#main > * {
+#main>* {
     position: absolute;
 }
 
 #definition {
-    top: 20px;
-    left: 20px;
+    top: 60px;
+    left: 130px;
+    margin-right: 130px;
 }
 
 #last {
-    font: 600 4rem "Poppins";
+    font: 600 5rem "Poppins";
 }
 
 #define {
     font: 1.2rem "Lato";
-    border-left: 2px solid var(--a);
+    border-left: 2px solid var(--b);
     margin-left: 1px;
     padding-left: 25px;
 }
@@ -52,7 +62,7 @@ body {
 #timer {
     top: 20px;
     right: 60px;
-    font: 2rem "Poppins";
+    font: 2.5rem "Poppins";
 }
 
 #guess {
@@ -64,10 +74,10 @@ body {
     font-family: "Lato";
     font-size: 2rem;
     padding: 10px 20px;
-    border-bottom: 4px solid var(--a);
+    border-bottom: 4px solid var(--b);
     border-radius: 6px 6px 3px 3px;
 }
 
 #guess:focus {
-    background-color: var(--b);
+    background-color: var(--a);
 }
