@@ -1,3 +1,4 @@
+• Fix definition ordering (see: pink)
 • Lemmatization detection (raining = rained = rain = rainy)
 • Working timer
 • Invalid word animation

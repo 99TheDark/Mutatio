@@ -16,8 +16,8 @@ const game = new Game();
 
 app.use(express.static(`${base}/public/`));
 
-game.guess("grain");
-game.define("The harvested seeds of various grass food crops eg: wheat, corn, barley.");
+game.guess("sand");
+game.define("A loose granular substance, typically pale yellowish brown, resulting from the erosion of siliceous and other rocks and forming a major constituent of beaches, riverbeds, the seabed, and deserts.");
 
 app.get("/", (req, res) => {
     res.sendFile(`${base}/redirect.html`);
@@ -26,17 +26,22 @@ app.get("/", (req, res) => {
 io.on("connection", socket => {
     game.add(socket);
 
-    socket.emit("setup", game.past, game.definition);
+    socket.emit("setup", game.count() == 1, game.past, game.definition);
 
     socket.on("disconnect", () => {
+        const wasTurn = game.isTurn(socket);
         game.remove(socket);
+
+        if(wasTurn) {
+            game.players.forEach(player => player.emit("update", game.isTurn(player)));
+        }
     });
 
     socket.on("guess", val => {
         const word = val.toLowerCase();
 
         if(
-            game.canGuess(socket) &&
+            game.isTurn(socket) &&
             !game.past.includes(word) &&
             /^[a-z]*$/g.test(word) &&
             compare(word, game.last()) == 1
@@ -46,12 +51,15 @@ io.on("connection", socket => {
     });
 
     socket.on("status", (status, word, definition) => {
-        if(status && game.canGuess(socket)) {
-            game.players.forEach(player => player.emit("turn", player == game.current(), word, definition));
-
+        if(status && game.isTurn(socket)) {
+            const prev = game.current();
             game.next();
             game.guess(word);
             game.define(definition);
+
+            game.players.forEach(player => {
+                player.emit("turn", player == prev, player == game.current(), word, definition);
+            });
         }
     });
 });

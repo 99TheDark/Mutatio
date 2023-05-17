@@ -11,11 +11,17 @@ $(document).ready(() => {
     });
 });
 
-socket.on("setup", (words, definition) => {
+socket.on("setup", (first, words, definition) => {
+    if(first) $(".turn").addClass("my-turn"); 
+
     words.forEach(word => $("#past").prepend(createWord(word)));
 
     $("#last").text(capitalize(words.at(-1)));
     $("#define").text(definition);
+});
+
+socket.on("update", turn => {
+    turn ? $(".turn").addClass("my-turn") : $(".turn").removeClass("my-turn");
 });
 
 socket.on("define", word => {
@@ -39,8 +45,10 @@ socket.on("define", word => {
         .catch(() => socket.emit("status", false, null, null))
 });
 
-socket.on("turn", (ignore, word, definition) => {
-    if(!ignore) {
+socket.on("turn", (was, mine, word, definition) => {
+    mine ? $(".turn").addClass("my-turn") : $(".turn").removeClass("my-turn");
+
+    if(!was) {
         $("#past").prepend(createWord(word));
         $("#last").text(capitalize(word));
         $("#define").text(definition);

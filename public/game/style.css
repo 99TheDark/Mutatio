@@ -8,7 +8,6 @@
     --g: #663a8a;
     --h: #a31907;
     --i: #1f1429;
-    --j: #000000;
 }
 
 body {
@@ -36,6 +35,8 @@ body {
     list-style-type: none;
     font: 300 1.5rem "Lato";
     line-height: 1.2em;
+    overflow-y: scroll;
+    margin: 0px;
 }
 
 #main>* {
@@ -81,4 +82,24 @@ body {
 
 #guess:focus {
     background-color: var(--a);
+}
+
+#notify {
+    position: fixed;
+    top: 0px;
+    right: 40px;
+    padding: 10px 30px;
+    border-radius: 0px 0px 10px 10px;
+    font: 1rem "Poppins";
+    background-color: var(--e);
+    color: white;
+    transition: transform 0.5s ease;
+}
+
+#notify.my-turn {
+    transform: translateY(0%);
+}
+
+#notify:not(.my-turn) {
+    transform: translateY(-100%);
 }

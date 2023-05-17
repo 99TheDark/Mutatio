@@ -32,7 +32,7 @@ module.exports = {
         total() {
             return this.past.length;
         }
-        canGuess(player) {
+        isTurn(player) {
             return this.players.indexOf(player) == this.turn;
         }
         count() {
