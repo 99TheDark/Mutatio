@@ -7,7 +7,8 @@
     --f: #9368b7;
     --g: #663a8a;
     --h: #a31907;
-    --i: #1f1429;
+    --i: #cc2b16;
+    --j: #1f1429;
 }
 
 body {
@@ -90,18 +91,20 @@ body {
 }
 
 .invalid {
-    animation: error ease 0.5s;
+    animation: error ease 0.4s;
 }
 
 @keyframes error {
-    10% {
+    0% {
         color: var(--h);
     }
-    70% {
-        transform: scale(113%);
+    60% {
+        transform: scale(110%);
+        color: var(--i);
     }
     90% {
         transform: scale(100%);
+        color: var(--h);
     }
     100% {
         color: auto;

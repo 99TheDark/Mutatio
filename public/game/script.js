@@ -1,14 +1,21 @@
 const socket = io();
 
-const ranking = ["conjunction", "article", "adjective", "noun", "pronoun", "verb", "adverb", "interjection"];
+const ranking = ["conjunction", "article", "adjective", "interjection", "verb", "adverb", "pronoun", "noun"];
 
 const capitalize = str => `${str[0].toUpperCase()}${str.substring(1).toLowerCase()}`;
 const createWord = word => `<li class="word">${capitalize(word)}</li>`;
 
+const invalid = () => {
+    $("#guess").addClass("invalid").on("animationend", () => {
+        $("#guess").removeClass("invalid");
+        $("#guess").prop("disabled", false);
+    });
+};
+
 $(document).ready(() => {
-    $("input").keyup(e => {
+    $("#guess").keyup(e => {
         if(e.key == "Enter") {
-            socket.emit("guess", $("input").val());
+            socket.emit("guess", $("#guess").val());
             $("#guess").prop("disabled", true);
         }
     });
@@ -47,20 +54,18 @@ socket.on("define", word => {
         })
         .catch(() => {
             socket.emit("status", false, null, null);
+            invalid();
         })
 });
 
 socket.on("invalid", () => {
-    $("#guess").addClass("invalid").on("animationend", () => {
-        $("#guess").removeClass("invalid");
-        $("#guess").prop("disabled", false);
-    });
+    invalid();
 });
 
 socket.on("turn", (was, mine, word, definition) => {
     if(mine) {
         $(".turn").addClass("visible");
-        $("input").val("");
+        $("#guess").val("");
         $("#guess").prop("disabled", false);
     } else {
         $(".turn").removeClass("visible");
