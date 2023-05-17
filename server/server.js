@@ -16,8 +16,8 @@ const game = new Game();
 
 app.use(express.static(`${base}/public/`));
 
-game.guess("sand");
-game.define("A loose granular substance, typically pale yellowish brown, resulting from the erosion of siliceous and other rocks and forming a major constituent of beaches, riverbeds, the seabed, and deserts.");
+game.guess("ink");
+game.define("A colored fluid used for writing, drawing, printing, or duplicating.");
 
 app.get("/", (req, res) => {
     res.sendFile(`${base}/redirect.html`);
