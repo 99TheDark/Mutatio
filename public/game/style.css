@@ -36,7 +36,9 @@ body {
 #main {
     flex-grow: 1;
     padding: 20px;
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 #past {
@@ -50,14 +52,22 @@ body {
     margin: 0px;
 }
 
-#main>* {
-    position: absolute;
+#top {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+}
+
+#bottom {
+    display: flex;
+    flex-direction: row-reverse;
 }
 
 #definition {
-    top: 60px;
-    left: 130px;
+    margin-top: 60px;
+    margin-left: 130px;
     width: 55%;
+    flex-grow: 1;
 }
 
 #last {
@@ -73,15 +83,15 @@ body {
 }
 
 #timer {
-    top: 20px;
-    right: 60px;
+    margin-top: 40px;
+    margin-right: 80px;
     font: 2.5rem "Poppins";
 }
 
 #guess {
     width: 20%;
-    bottom: 40px;
-    right: 80px;
+    margin-bottom: 40px;
+    margin-right: 80px;
     border: none;
     outline: none;
     font-family: "Lato";

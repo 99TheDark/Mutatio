@@ -1,4 +1,3 @@
-• Make UI positions not absolute
 • Navigation bar
 • User list 
 • Username
