@@ -1,10 +1,11 @@
+• Move pop-up to center of words
 • User list 
 • Username
 • Cache username
 • Working timer
 • Timer up stops the person from playing but can continue viewing
 • Give up button
+• Detailed error messages
 • Connect Azure app
 • Main page
 • Decide how to handle dead-ends (like brave -> bravo)
-• Detailed error messages
