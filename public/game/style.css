@@ -49,13 +49,13 @@ img {
 }
 
 #past-wrapper {
-    flex-basis: 18%;
+    flex-basis: 12%;
     flex-shrink: 0;
     margin: 0px;
     border-left: 2px solid black;
     display: flex;
     flex-direction: column;
-    padding: 70px 0px 30px 40px;
+    padding: 70px 30px 30px 40px;
 }
 
 #past {

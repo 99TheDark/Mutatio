@@ -9,5 +9,5 @@
 • Connect Azure app
 • Main page
 • Points
-• Gain points by word length 
+• Gain points by longer word, loose points from shorter word, and gain a little amount of points for any word
 • Decide how to handle dead-ends (like brave -> bravo)

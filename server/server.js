@@ -65,9 +65,26 @@ Sou
 So
 Son
 Soon
-Toon`.split("\n");
+Toon
+Ton
+Tron
+Ron
+Rom
+Roam
+Foam
+Loam
+Loan
+Loon
+Noon
+Noun
+Non
+No
+Not
+Snot
+Snoot
+Shoot`.split("\n");
 
-a.forEach(b => game.guess(b));
+a.forEach(b => game.guess(b.toLowerCase()));
 
 app.get("/", (req, res) => {
     res.sendFile(`${base}/redirect.html`);
