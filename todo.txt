@@ -8,4 +8,6 @@
 • Detailed error messages
 • Connect Azure app
 • Main page
+• Points
+• Gain points by word length 
 • Decide how to handle dead-ends (like brave -> bravo)

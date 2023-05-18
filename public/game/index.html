@@ -23,28 +23,30 @@
 </head>
 
 <body>
-    <nav>
-        <ul>
-            <img id="logo" src="../images/favicon/favicon.png">
-        </ul>
-    </nav>
-    <div id="content">
-        <div id="main">
-            <div id="top">
-                <div id="definition">
-                    <p id="last"></p>
-                    <p id="define"></p>
+    <div id="all">
+        <nav>
+            <ul>
+                <img id="logo" src="../images/favicon/favicon.png">
+            </ul>
+        </nav>
+        <div id="content">
+            <div id="main">
+                <div id="top">
+                    <div id="definition">
+                        <p id="last"></p>
+                        <p id="define"></p>
+                    </div>
+                    <p id="timer">1:00</p>
                 </div>
-                <p id="timer">1:00</p>
+                <div id="bottom">
+                    <input id="guess" class="turn" type="text" value=""></input>
+                </div>
             </div>
-            <div id="bottom">
-                <input id="guess" class="turn" type="text" value=""></input>
+            <div id="past-wrapper">
+                <ul id="past"></ul>
             </div>
+            <div id="notify" class="turn">It's your turn!</div>
         </div>
-        <div id="past-words">
-            <ul id="past"></ul>
-        </div>
-        <div id="notify" class="turn">It's your turn!</div>
     </div>
 </body>
 

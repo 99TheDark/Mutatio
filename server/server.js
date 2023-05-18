@@ -19,6 +19,56 @@ app.use(express.static(`${base}/public/`));
 game.guess("tail");
 game.define("The hindmost part of an animal, especially when prolonged beyond the rest of the body, such as the flexible extension of the backbone in a vertebrate, the feathers at the hind end of a bird, or a terminal appendage in an insect.");
 
+let a = `Tail
+Trail
+Train
+Brain
+Bran
+Brand
+Grand
+Rand
+Ran
+Rant
+Rank
+Crank
+Crane
+Crave
+Cave
+Save
+Shave
+Have
+Haze
+Hate
+Hat
+Chat
+Shat
+Shot
+Shoot
+Shoo
+Show
+Chow
+Chop
+Chomp
+Chump
+Hump
+Hemp
+Help
+Held
+Hold
+Mold
+Fold
+Gold
+Sold
+Sol
+Soul
+Sou
+So
+Son
+Soon
+Toon`.split("\n");
+
+a.forEach(b => game.guess(b));
+
 app.get("/", (req, res) => {
     res.sendFile(`${base}/redirect.html`);
 });
