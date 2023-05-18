@@ -16,7 +16,17 @@ body {
     padding: 0px;
 }
 
+#main {
+    /*display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;*/
+    margin: 0px;
+    padding: 0px !important;
+}
+
 #content {
+    /* flex-grow: 1; */
     width: 100vw;
     height: 100vh;
     display: flex;
@@ -112,7 +122,7 @@ body {
 }
 
 #notify {
-    position: fixed;
+    position: absolute;
     top: 0px;
     right: 40px;
     padding: 10px 30px;

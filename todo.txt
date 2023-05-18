@@ -1,6 +1,7 @@
+• Make UI positions not absolute
+• Navigation bar
 • User list 
 • Username
-• Navigation bar
 • Cache username
 • Working timer
 • Timer up stops the person from playing but can continue viewing
@@ -8,3 +9,4 @@
 • Connect Azure app
 • Main page
 • Decide how to handle dead-ends (like brave -> bravo)
+• Detailed error messages

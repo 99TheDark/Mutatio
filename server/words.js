@@ -15,6 +15,4 @@ const compare = (a, b) => {
     }
 };
 
-module.exports = {
-    compare: compare
-};
+module.exports = compare;
