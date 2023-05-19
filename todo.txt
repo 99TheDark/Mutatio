@@ -1,3 +1,5 @@
+Todo:
+• Fix lemmatizer
 • Move pop-up to center of words
 • User list 
 • Username
@@ -11,3 +13,9 @@
 • Points
 • Gain points by longer word, loose points from shorter word, and gain a little amount of points for any word
 • Decide how to handle dead-ends (like brave -> bravo)
+
+Functions:
+• Game.wasTurn()
+
+Bugs:
+• Disabled never re-enabling

@@ -3,6 +3,7 @@ const express = require("express");
 const http = require("http");
 const {Server} = require("socket.io");
 const Game = require("./game.js");
+const Player = require("./player.js");
 const compare = require("./words.js");
 
 const app = express();
@@ -12,100 +13,32 @@ const io = new Server(server);
 const port = process.env.PORT || 8080;
 const base = path.join(__dirname, "..");
 
-const game = new Game();
+const game = new Game("testing-");
 
 app.use(express.static(`${base}/public/`));
 
-game.guess("tail");
-game.define("The hindmost part of an animal, especially when prolonged beyond the rest of the body, such as the flexible extension of the backbone in a vertebrate, the feathers at the hind end of a bird, or a terminal appendage in an insect.");
-
-let a = `Tail
-Trail
-Train
-Brain
-Bran
-Brand
-Grand
-Rand
-Ran
-Rant
-Rank
-Crank
-Crane
-Crave
-Cave
-Save
-Shave
-Have
-Haze
-Hate
-Hat
-Chat
-Shat
-Shot
-Shoot
-Shoo
-Show
-Chow
-Chop
-Chomp
-Chump
-Hump
-Hemp
-Help
-Held
-Hold
-Mold
-Fold
-Gold
-Sold
-Sol
-Soul
-Sou
-So
-Son
-Soon
-Toon
-Ton
-Tron
-Ron
-Rom
-Roam
-Foam
-Loam
-Loan
-Loon
-Noon
-Noun
-Non
-No
-Not
-Snot
-Snoot
-Shoot`.split("\n");
-
-a.forEach(b => game.guess(b.toLowerCase()));
+game.guess("cod");
+game.define("A large marine fish with a small barbel on the chin.");
 
 app.get("/", (req, res) => {
     res.sendFile(`${base}/redirect.html`);
 });
 
 io.on("connection", socket => {
-    game.add(socket);
+    const player = new Player(socket, socket.id, game.name);
+    game.add(player);
 
     socket.emit("setup", game.count() == 1, game.past, game.definition);
 
     socket.on("disconnect", () => {
-        const wasTurn = game.isTurn(socket);
-        game.remove(socket);
+        const wasTurn = game.isTurn(player);
+        game.remove(player);
 
-        if(wasTurn) {
-            game.players.forEach(player => player.emit("update", game.isTurn(player)));
-        }
+        if(wasTurn) game.players.forEach(p => p.socket.emit("update", game.isTurn(p)));
     });
 
     socket.on("guess", val => {
-        if(game.isTurn(socket)) {
+        if(game.isTurn(player)) {
             const word = val.toLowerCase();
             if(
                 !game.past.includes(word) &&
@@ -121,14 +54,14 @@ io.on("connection", socket => {
     });
 
     socket.on("status", (status, word, definition) => {
-        if(status && game.isTurn(socket)) {
+        if(status && game.isTurn(player)) {
             const prev = game.current();
             game.next();
             game.guess(word);
             game.define(definition);
 
-            game.players.forEach(player => {
-                player.emit("turn", player == prev, game.isTurn(player), word, definition);
+            game.players.forEach(p => {
+                p.socket.emit("turn", p == prev, game.isTurn(p), word, definition);
             });
         }
     });

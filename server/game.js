@@ -1,11 +1,12 @@
 const {lemmatizer} = require("lemmatizer");
 
 module.exports = class Game {
-    constructor() {
+    constructor(name) {
         this.players = [];
         this.turn = 0;
         this.past = [];
         this.definition = null;
+        this.name = name;
     }
     add(player) {
         this.players.push(player);
@@ -14,6 +15,7 @@ module.exports = class Game {
         const idx = this.players.indexOf(player);
         this.players.splice(idx, 1);
         if(idx < this.turn) this.turn--;
+        if(idx >= this.players.length) this.turn = 0;
     }
     valid(word) {
         return !this.past.includes(lemmatizer(word));

@@ -96,6 +96,7 @@ img {
     border-left: 2px solid var(--b);
     margin-left: 1px;
     padding-left: 25px;
+    width: 75%;
 }
 
 #timer {
