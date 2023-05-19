@@ -7,6 +7,12 @@ module.exports = class Player {
         this.points = 0;
         this.spectating = false;
     }
+    emit(...args) {
+        this.socket.emit(...args);
+    }
+    on(...args) {
+        this.socket.on(...args);
+    }
     spectate() {
         this.spectating = true;
     }

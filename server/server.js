@@ -28,40 +28,39 @@ io.on("connection", socket => {
     const player = new Player(socket, socket.id, game.name);
     game.add(player);
 
-    socket.emit("setup", game.count() == 1, game.past, game.definition);
+    player.emit("setup", game.count() == 1, game.past, game.definition);
 
-    socket.on("disconnect", () => {
+    player.on("disconnect", () => {
         const wasTurn = game.isTurn(player);
         game.remove(player);
 
-        if(wasTurn) game.players.forEach(p => p.socket.emit("update", game.isTurn(p)));
+        if(wasTurn) game.players.forEach(p => p.emit("update", game.isTurn(p)));
     });
 
-    socket.on("guess", val => {
+    player.on("guess", val => {
         if(game.isTurn(player)) {
             const word = val.toLowerCase();
             if(
                 !game.past.includes(word) &&
                 /^[a-z]*$/g.test(word) &&
-                compare(word, game.last()) == 1 &&
+                compare(word, game.lastWord()) == 1 &&
                 game.valid(word)
             ) {
-                socket.emit("define", word);
+                player.emit("define", word);
             } else {
-                socket.emit("invalid", word);
+                player.emit("invalid", word);
             }
         }
     });
 
-    socket.on("status", (status, word, definition) => {
+    player.on("status", (status, word, definition) => {
         if(status && game.isTurn(player)) {
-            const prev = game.current();
             game.next();
             game.guess(word);
             game.define(definition);
 
             game.players.forEach(p => {
-                p.socket.emit("turn", p == prev, game.isTurn(p), word, definition);
+                p.emit("turn", game.wasTurn(p), game.isTurn(p), word, definition);
             });
         }
     });

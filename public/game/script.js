@@ -11,8 +11,8 @@ const ranking = [
     "pronoun",
 ];
 
-const capitalize = (str) => `${str[0].toUpperCase()}${str.substring(1).toLowerCase()}`;
-const createWord = (word) => `<li class="word">${capitalize(word)}</li>`;
+const capitalize = str => `${str[0].toUpperCase()}${str.substring(1).toLowerCase()}`;
+const createWord = word => `<li class="word">${capitalize(word)}</li>`;
 
 const invalid = () => {
     $("#guess")
@@ -24,7 +24,7 @@ const invalid = () => {
 };
 
 $(document).ready(() => {
-    $("#guess").keyup((e) => {
+    $("#guess").keyup(e => {
         if(e.key == "Enter") {
             socket.emit("guess", $("#guess").val());
             $("#guess").prop("disabled", true);
@@ -41,11 +41,11 @@ socket.on("setup", (first, words, definition) => {
     $("#define").text(definition);
 });
 
-socket.on("update", (turn) => {
+socket.on("update", turn => {
     turn ? $(".turn").addClass("visible") : $(".turn").removeClass("visible");
 });
 
-socket.on("define", (word) => {
+socket.on("define", word => {
     fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
         .then((data) => data.json())
         .then((json) => {

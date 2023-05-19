@@ -29,17 +29,20 @@ module.exports = class Game {
     next() {
         this.turn = (this.turn + 1) % this.players.length;
     }
-    last() {
+    lastWord() {
         return this.past[this.past.length - 1];
     }
     current() {
         return this.players[this.turn];
     }
-    total() {
+    totalWords() {
         return this.past.length;
     }
     isTurn(player) {
         return this.players.indexOf(player) == this.turn;
+    }
+    wasTurn(player) {
+        return this.players.indexOf(player) == (this.turn == 0 ? this.players.length : this.turn) - 1;
     }
     count() {
         return this.players.length;
