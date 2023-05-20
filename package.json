@@ -1,7 +1,7 @@
 {
     "main": "server/server.js",
     "scripts": {
-        "start": "node server/server.js && npx kill-port 8080"
+        "start": "node server/server && npx kill-port 8080"
     },
     "dependencies": {
         "express": "^4.18.2",
