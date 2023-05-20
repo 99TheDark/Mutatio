@@ -8,7 +8,6 @@ Todo:
 • Timer up stops the person from playing but can continue viewing
 • Give up button
 • Detailed error messages
-• Connect Azure app
 • Main page
 • Points
 • Gain points by longer word, loose points from shorter word, and gain a little amount of points for any word
