@@ -10,7 +10,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 
-const port = 8080;
+const port = process.env.PORT || 8080;
 const base = path.join(__dirname, "..");
 
 const game = new Game("testing-");
